@@ -15,6 +15,10 @@ static int	check_format(char **av)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	you can read two times from same file
+	just close and open the fd once again
+*/
 void	before_alloc(int ac, char **av)
 {
 	char	*path;
