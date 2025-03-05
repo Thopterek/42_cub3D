@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 08:26:29 by ndziadzi          #+#    #+#             */
-/*   Updated: 2024/11/05 08:57:33 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:42:57 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,6 @@ char	*get_next_line(int fd)
 	if (cc == 0 || tpr == NULL)
 		return (free(buf), buf = NULL, tpr);
 	return (tpr);
-	if (cc == 0 && buf != NULL && *buf != '\0')
-		tpr = ft_substr(buf, start, f_index(buf, start) - start + 1);
-	return (free(buf), buf = NULL, tpr);
 }
 
 // // cc -Wall -Werror -Wextra -D BUFFER_SIZE=n get_next_line.c

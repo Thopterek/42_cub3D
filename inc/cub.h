@@ -28,5 +28,6 @@ void	before_alloc(int ac, char **av);
 */
 void	error_ac(void);
 void	error_format(char **av);
+void	error_path(char *path, char **av);
 
 #endif
