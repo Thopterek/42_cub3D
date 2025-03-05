@@ -1,10 +1,7 @@
 NAME = libftprintf.a
 SRCS = \
-	ft_printf.c \
-	ft_uns_itoa.c \
-	ft_hex_itoa.c \
-	ft_ptr_itoa.c \
-	get_next_line.c
+	ft_printf.c ft_uns_itoa.c ft_hex_itoa.c \
+	ft_ptr_itoa.c get_next_line.c ft_strcmp.c
 
 OBJS = $(SRCS:.c=.o)
 CC = cc

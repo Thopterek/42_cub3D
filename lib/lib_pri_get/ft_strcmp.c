@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 07:09:48 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/05 13:19:38 by ndziadzi         ###   ########.fr       */
+/*   Created: 2025/02/13 12:06:20 by ndziadzi          #+#    #+#             */
+/*   Updated: 2025/02/13 12:11:40 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "./libft/libft.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	cc;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-int		ft_printf(const char *av, ...);
-char	*ft_uns_itoa(unsigned int n);
-char	*ft_hex_itoa(unsigned int n, char cc);
-char	*ft_ptr_itoa(unsigned long n);
-char	*get_next_line(int fd);
-
-#endif
+	cc = 0;
+	while (s1[cc] != '\0' && s2[cc] != '\0')
+	{
+		if (s1[cc] != s2[cc])
+			return (s1[cc] - s2[cc]);
+		cc++;
+	}
+	return (s1[cc] - s2[cc]);
+}
