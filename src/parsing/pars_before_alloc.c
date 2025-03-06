@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:34:57 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 11:39:41 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:34:37 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_format(char **av)
 	return (EXIT_SUCCESS);
 }
 
-static char *png_path(char *line)
+static char	*png_path(char *line)
 {
 	char	*path;
 	int		cc;
