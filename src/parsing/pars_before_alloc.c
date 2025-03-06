@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:34:57 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 11:34:59 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:39:41 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void	before_alloc(int ac, char **av)
 		error_format(av);
 	path = bin_strjoin("./map/", av[1]);
 	look_for_elements(path);
+	continue_checking(path);
 	bin_malloc(-1);
 }
