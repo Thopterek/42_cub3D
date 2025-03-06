@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:34:57 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 14:34:37 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:16:48 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,64 +27,61 @@ static int	check_format(char **av)
 	return (EXIT_SUCCESS);
 }
 
-static char	*png_path(char *line)
+static void	check_element(char *line, char *actual, int fd)
 {
-	char	*path;
-	int		cc;
+	static int	no = 0;
+	static int	so = 0;
+	static int	we = 0;
+	static int	ea = 0;
 
-	cc = 0;
-	path = bin_strdup(line + 3);
-	while (path[cc + 1] != '\0')
-		cc++;
-	if (path[cc] == '\n')
-		path[cc] = '\0';
-	return (path);
+	if (line == NULL)
+	{
+		close(fd);
+		if (no != 1 || so != 1 || we != 1 || ea != 1)
+			error_element();
+		else
+			return ;
+	}
+	if (ft_strncmp(line, "NO", 2) == 0)
+		no++;
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		so++;
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		we++;
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		ea++;
+	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0)
+		open_again(get_element(line + 2), PNG, actual);
 }
 
-static void	look_for_elements(char *path)
+static void	look_for_elements(char *path, int fd)
 {
 	char	*line;
-	int		fd;
+	int		cc;
 
 	fd = open_again(path, MAP, path);
 	line = get_next_line(fd);
-	if (ft_strncmp(line, "NO", 2) != 0)
-		error_element(line, "NO");
-	open_again(png_path(line), PNG, line);
-	free(line);
-	line = get_next_line(fd);
-	if (ft_strncmp(line, "SO", 2) != 0)
-		error_element(line, "SO");
-	open_again(png_path(line), PNG, line);
-	free(line);
-	line = get_next_line(fd);
-	if (ft_strncmp(line, "WE", 2) != 0)
-		error_element(line, "WE");
-	open_again(png_path(line), PNG, line);
-	free(line);
-	line = get_next_line(fd);
-	if (ft_strncmp(line, "EA", 2) != 0)
-		error_element(line, "EA");
-	open_again(png_path(line), PNG, line);
-	free(line);
-	close(fd);
-}
-
-int	open_again(char *path, int flag, char *actual)
-{
-	int		fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd == -1 && flag == MAP)
-		error_path(path);
-	else if (fd == -1 && flag == PNG)
-		error_png(path, actual);
-	else if (flag == PNG)
+	cc = 0;
+	while (line != NULL)
 	{
-		close(fd);
-		fd = 0;
+		if (ft_strncmp(line, "\n", 1) == 0)
+			line = free_and_get(line, fd);
+		else
+		{
+			while (line[cc] != '\0' && space(line[cc]) == 0)
+				cc++;
+			if (line[cc] == '\0' || line[cc] == '\n')
+				line = free_and_get(line, fd);
+			else
+			{
+				check_element(line + cc, line, 0);
+				line = free_and_get(line, fd);
+			}
+		}
+		cc = 0;
 	}
-	return (fd);
+	check_element(NULL, NULL, fd);
 }
 
 void	before_alloc(int ac, char **av)
@@ -96,7 +93,7 @@ void	before_alloc(int ac, char **av)
 	if (check_format(av) != 0)
 		error_format(av);
 	path = bin_strjoin("./map/", av[1]);
-	look_for_elements(path);
+	look_for_elements(path, 0);
 	continue_checking(path);
 	bin_malloc(-1);
 }

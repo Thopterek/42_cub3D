@@ -1,0 +1,15 @@
+NO ./tex/tmp_no.png
+SO ./tex/tmp_so.png
+WE ./tex/tmp_we.png
+EA ./tex/tmp_ea.png
+
+F 220,100,0
+C 225,30,0
+
+EA ./tex/tmp_ea.png
+
+111111
+100101
+101001
+1100N1
+111111

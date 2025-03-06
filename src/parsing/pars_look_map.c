@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:55 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 15:57:54 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:12:47 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ static void	remove_newline(char **map)
 	}
 }
 
+// int cc = 0;
+// while (map[cc] != NULL)
+// 	ft_printf("%s\n", map[cc++]);
 void	look_map(char **map)
 {
 	remove_newline(map);
