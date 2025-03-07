@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:19:59 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 11:51:56 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:10:13 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 		Flags
 	- for checking files
 	- looking at colors
+	- coordinates of player
 */
 typedef enum e_flags
 {
 	PNG,
 	MAP,
 	FLOOR,
-	CEILING
+	CEILING,
+	X,
+	Y
 }	t_flags;
 
 /*
@@ -82,8 +85,10 @@ void	error_nothing(void);
 	related to look_map.c
 	- invalid character
 	- too many players
+	- unclosed walls
 */
 void	error_char(char c);
 void	error_orient(int orient);
+void	error_walls(int space);
 
 #endif

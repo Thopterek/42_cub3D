@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:55 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 11:53:37 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:28:58 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,70 @@ static void	valid_chars(char **map, char c, int line, int i)
 		error_orient(orient);
 }
 
-// int cc = 0;
-// while (map[cc] != NULL)
-// 	ft_printf("%s\n", map[cc++]);
+static void	ffill(char **map, int x, int y, int *out)
+{
+	if (y < 0 || x < 0 || map[y] == NULL
+		|| map[y][x] == '1' || map[y][x] == 'V')
+	{
+		if (map[y] == NULL || y < 0 || x < 0)
+			*out += 1;
+		return ;
+	}
+	if (space(map[y][x]) == 0 || map[y][x] == '\0')
+	{
+		*out += 1;
+		return ;
+	}
+	if (map[y][x] == '\0')
+		return ;
+	map[y][x] = 'V';
+	ffill(map, x + 1, y, out);
+	ffill(map, x - 1, y, out);
+	ffill(map, x, y + 1, out);
+	ffill(map, x, y - 1, out);
+}
+
+static int	find_p(int flag, char **map)
+{
+	char	c;
+	int		y;
+	int		x;
+
+	y = 0;
+	x = 0;
+	while (map[y] != NULL)
+	{
+		while (map[y][x] != '\0')
+		{
+			c = map[y][x];
+			if (c != '1' && c != '0' && space(c) != 0)
+			{
+				if (flag == X)
+					return (x);
+				else if (flag == Y)
+					return (y);
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	return (EXIT_FAILURE);
+}
+
+/*
+	Except for the map,
+	each type of information
+	from an element can be separated
+	by one or more space(s).
+*/
 void	look_map(char **map)
 {
+	int	out;
+
+	out = 0;
 	valid_chars(map, '0', 0, 0);
+	ffill(map, find_p(X, map), find_p(Y, map), &out);
+	if (out != 0)
+		error_walls(out);
 }
