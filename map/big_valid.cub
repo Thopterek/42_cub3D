@@ -1,10 +1,11 @@
 NO ./tex/tmp_no.png
      SO          ./tex/tmp_so.png
 WE     ./tex/tmp_we.png
-EA ./tex/tmp_ea.png
+
+EA                                  ./tex/tmp_ea.png
 
 F 220,100,0
-C 225,30,0
+C 225,30,255
 
         1111111111111111111111111
         1000000000110000000000001

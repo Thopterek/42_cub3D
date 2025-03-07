@@ -6,81 +6,88 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:39:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 18:43:22 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 10:35:32 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub.h"
 
-static void	look_for_range(char **colors, char *line)
+static void	test_color(char *line, char *actual, int fd, int flag)
 {
-	int	cc;
-	int	tmp;
+	char	**colors;
+	int		cc;
+	int		tmp;
 
 	cc = 0;
+	colors = bin_split(get_element(line), ',');
 	while (colors[cc] != NULL)
 	{
 		tmp = ft_atoi(colors[cc]);
 		if (tmp < 0 || tmp > 255)
-			error_range(tmp, line);
+			error_range(tmp, actual, fd, flag);
 		cc++;
 	}
 	if (cc > 3 || cc < 3)
-		error_rgb(cc, line);
+		error_rgb(cc, actual, fd, flag);
 }
 
-static void	check_color(char *line, int flag)
+static void	check_color(char *line, char *actual, int fd)
 {
-	char	**colors;
-	char	*no_newline;
-	int		cc;
+	static int	floor = 0;
+	static int	ceiling = 0;
 
-	cc = 0;
-	no_newline = bin_strdup(line);
-	while (no_newline[cc + 1] != '\0')
-		cc++;
-	if (no_newline[cc] == '\n')
-		no_newline[cc] = '\0';
-	if (flag == FLOOR)
+	if (line == NULL)
 	{
-		if (strncmp(no_newline, "F", 1) != 0)
-			error_updown(no_newline, 'F', line);
+		close(fd);
+		if (floor != 1 || ceiling != 1)
+			error_color_count(floor, ceiling);
+		else
+			return ;
 	}
-	else if (flag == CEILING)
+	if (ft_strncmp(line, "F", 1) == 0)
 	{
-		if (strncmp(no_newline, "C", 1) != 0)
-			error_updown(no_newline, 'C', line);
+		test_color(line, actual, fd, FLOOR);
+		floor++;
 	}
-	colors = bin_split(no_newline + 2, ',');
-	look_for_range(colors, line);
+	else if (strncmp(line, "C", 1) == 0)
+	{
+		test_color(line, actual, fd, CEILING);
+		ceiling++;
+	}
 }
 
-static void	find_colors(char *path)
+static void	find_colors(char *path, int fd)
 {
-	int		cc;
-	int		fd;
 	char	*line;
+	int		cc;
 
+	fd = open_again(path, MAP, path);
+	line = get_next_line(fd);
 	cc = 0;
-	fd = open_again(path, MAP, NULL);
-	line = get_next_line(fd);
-	while (line != NULL && cc != 5)
+	while (line != NULL)
 	{
-		free(line);
-		line = get_next_line(fd);
-		cc++;
+		if (ft_strncmp(line, "\n", 1) == 0)
+			line = free_and_get(line, fd);
+		else
+		{
+			while (line[cc] != '\0' && space(line[cc]) == 0)
+				cc++;
+			if (line[cc] == '\0' || line[cc] == '\n')
+				line = free_and_get(line, fd);
+			else
+			{
+				check_color(line + cc, line, 0);
+				line = free_and_get(line, fd);
+			}
+		}
+		cc = 0;
 	}
-	check_color(line, FLOOR);
-	free(line);
-	line = get_next_line(fd);
-	check_color(line, CEILING);
-	free(line);
+	check_color(NULL, NULL, fd);
 }
 
-static char	**make_map(char *path, int map_size)
-{
+static char	**make_map(char *path, int map_size, int fd)
+{	
 	int		cc;
-	int		fd;
 	char	*line;
 	char	**map;
 
@@ -88,22 +95,22 @@ static char	**make_map(char *path, int map_size)
 	fd = open_again(path, MAP, NULL);
 	map = bin_malloc(sizeof(char *) * map_size);
 	line = get_next_line(fd);
-	while (line != NULL && cc != 7)
-	{
-		free(line);
-		line = get_next_line(fd);
-		cc++;
-	}
-	cc = 0;
 	while (line != NULL)
 	{
-		free(line);
-		line = get_next_line(fd);
+		line = free_and_get(line, fd);
 		if (line == NULL)
 			break ;
-		map[cc++] = bin_strdup(line);
+		if (ft_strncmp(get_element(line), "1", 1) == 0 || cc != 0)
+		{
+			map[cc] = bin_strdup(line);
+			if (map[cc][ft_strlen(map[cc]) - 1] == '\n')
+				map[cc][ft_strlen(map[cc]) - 1] = '\0';
+			cc++;
+		}
 	}
-	return (map[cc] = NULL, close(fd), map);
+	map[cc] = NULL;
+	close(fd);
+	return (map);
 }
 
 /*
@@ -111,29 +118,22 @@ static char	**make_map(char *path, int map_size)
 	first going through all the information checked
 	then getting the size of the map needed for later
 */
-void	continue_checking(char *path)
+void	continue_checking(char *path, int fd, char *line)
 {
-	char	*line;
-	int		fd;
-	int		map_counter;
+	int	map_size;
 
-	map_counter = 0;
-	find_colors(path);
+	map_size = 0;
+	find_colors(path, 0);
 	fd = open_again(path, MAP, NULL);
 	line = get_next_line(fd);
-	while (line != NULL && map_counter != 8)
-	{
-		free(line);
-		line = get_next_line(fd);
-		map_counter++;
-	}
-	map_counter = 0;
 	while (line != NULL)
 	{
-		free(line);
-		line = get_next_line(fd);
-		map_counter++;
+		if (ft_strncmp(get_element(line), "1", 1) == 0)
+			map_size++;
+		line = free_and_get(line, fd);
 	}
 	close(fd);
-	look_map(make_map(path, map_counter));
+	if (map_size == 0)
+		error_nothing();
+	look_map(make_map(path, map_size, 0));
 }

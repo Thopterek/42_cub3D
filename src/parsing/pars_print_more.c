@@ -6,38 +6,52 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:56:15 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 14:01:36 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 10:17:12 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub.h"
 
-void	error_updown(char *no_newline, char flag, char *line)
-{
-	ft_printf("Error: the color for '%c' is not set up\n", flag);
-	ft_printf("check: '%s' for typos\n", no_newline);
-	if (line != NULL)
-		free(line);
-	bin_malloc(-1);
-	exit(PARSING);
-}
-
-void	error_rgb(int cc, char *line)
+void	error_rgb(int cc, char *line, int fd, int flag)
 {
 	ft_printf("Error: not in RGB format, should be 3 numbers\n");
-	ft_printf("check: there were '%d' numbers\n", cc);
+	if (flag == FLOOR)
+		ft_printf("check: there were '%d' numbers in floor\n", cc);
+	else
+		ft_printf("check: there were '%d' numbers in ceiling\n", cc);
 	if (line != NULL)
 		free(line);
+	close(fd);
 	bin_malloc(-1);
 	exit(PARSING);
 }
 
-void	error_range(int tmp, char *line)
+void	error_range(int tmp, char *line, int fd, int flag)
 {
 	ft_printf("Error: number '%d' is not in RGB range\n", tmp);
-	ft_printf("check: the number should be between 0 and 255\n");
+	if (flag == FLOOR)
+		ft_printf("check: colors in floor should be between 0 and 255\n");
+	else
+		ft_printf("check: colors in ceiling should be between 0 and 255\n");
 	if (line != NULL)
 		free(line);
+	close(fd);
+	bin_malloc(-1);
+	exit(PARSING);
+}
+
+void	error_color_count(int floor, int ceiling)
+{
+	ft_printf("Error: count of indetifiers for colors are wrong\n");
+	ft_printf("check: there are '%d' floors and '%d' ceilings\n", floor, ceiling);
+	bin_malloc(-1);
+	exit(PARSING);
+}
+
+void	error_nothing(void)
+{
+	ft_printf("Error: map not found, there were no walls\n");
+	ft_printf("check: every valid map should have char '1'\n");
 	bin_malloc(-1);
 	exit(PARSING);
 }
