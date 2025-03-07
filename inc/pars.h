@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:19:59 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 10:38:13 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:51:56 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,14 @@ void	error_rgb(int cc, char *line, int fd, int flag);
 void	error_range(int tmp, char *line, int fd, int flag);
 void	error_color_count(int floor, int ceiling);
 void	error_nothing(void);
+
+/*
+	More errors in problem.c
+	related to look_map.c
+	- invalid character
+	- too many players
+*/
+void	error_char(char c);
+void	error_orient(int orient);
 
 #endif

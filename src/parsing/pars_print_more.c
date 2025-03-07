@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:56:15 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 10:17:12 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:22:30 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	error_range(int tmp, char *line, int fd, int flag)
 void	error_color_count(int floor, int ceiling)
 {
 	ft_printf("Error: count of indetifiers for colors are wrong\n");
-	ft_printf("check: there are '%d' floors and '%d' ceilings\n", floor, ceiling);
+	ft_printf("check: there are '%d' floors and '%d' ceilings\n",
+		floor, ceiling);
 	bin_malloc(-1);
 	exit(PARSING);
 }
