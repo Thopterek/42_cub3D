@@ -6,12 +6,15 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 17:44:58 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:27:21 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
+
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /*
 	helper for setting
@@ -83,5 +86,11 @@ typedef struct s_info
 */
 void	initialization(char **av, t_info **info);
 void	fill_graphic(t_graphic *graphic, char *path, int fd);
+
+/*
+	potential errors:
+	- mlx_init fails
+*/
+void	error_mlx(void);
 
 #endif

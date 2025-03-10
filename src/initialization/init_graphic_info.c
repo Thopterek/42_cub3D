@@ -6,13 +6,13 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 17:42:42 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:37:40 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub.h"
 
-static void grab_path(t_graphic *graphic, char *line)
+static void	grab_path(t_graphic *graphic, char *line)
 {
 	if (ft_strncmp(line, "NO", 2) == 0)
 		graphic->north_path = bin_strdup(get_element(line + 2));
