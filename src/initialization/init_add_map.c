@@ -6,21 +6,19 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 12:40:11 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:58:34 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub.h"
 
-static char	**get_map(char **av)
+static char	**get_map(char *path)
 {
-	char	*path;
 	char	*line;
 	int		map_size;
 	int		fd;
 
 	map_size = 0;
-	path = bin_strjoin("./map/", av[1]);
 	fd = open_again(path, MAP, path);
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -33,16 +31,50 @@ static char	**get_map(char **av)
 	return (make_map(path, map_size, fd));
 }
 
-// check if the map works
-// int cc = 0;
-// while (map[cc] != NULL)
-// {
-// 	ft_printf("%s\n", map[cc]);
-// 	cc++;
-// }
-void	initialization(char **av)
+static void	save_pos(t_info **info, int y, int x, int flag)
 {
-	char	**map;
+	(*info)->player->position_y = y;
+	(*info)->player->position_x = x;
+	(*info)->player->orient = flag;
+}
 
-	map = get_map(av);
+static void	find_player(char **map, t_info **info)
+{
+	int		y;
+	int		x;
+	char	c;
+
+	y = 0;
+	x = 0;
+	while (map[y] != NULL)
+	{
+		while (map[y][x] != '\0')
+		{
+			c = map[y][x];
+			if (c == 'N')
+				save_pos(info, y, x, NORTH);
+			else if (c == 'W')
+				save_pos(info, y, x, WEST);
+			else if (c == 'E')
+				save_pos(info, y, x, EAST);
+			else if (c == 'S')
+				save_pos(info, y, x, SOUTH);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+void	initialization(char **av, t_info **info)
+{
+	char	*path;
+
+	(*info) = bin_malloc(sizeof(t_info));
+	(*info)->player = bin_malloc(sizeof(t_player));
+	(*info)->graphic = bin_malloc(sizeof(t_graphic));
+	path = bin_strjoin("./map/", av[1]);
+	(*info)->map = get_map(path);
+	find_player((*info)->map, info);
+	(void)av;
 }

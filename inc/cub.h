@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/10 14:41:48 by ndziadzi          #+#    #+#             */
+/*   Updated: 2025/03/10 15:04:15 by ndziadzi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -12,11 +24,15 @@
 /*
 	enums for error handling
 	setting the exit codes
+	- parsing (start)
+	- initialization (middle)
+	- game output (end)
 */
-typedef enum e_errors
+typedef enum s_errors
 {
 	PARSING = 1,
-	INITIAL = 2
+	INITIAL = 2,
+	GAME = 3
 }	t_errors;
 
 #endif
