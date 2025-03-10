@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 15:58:34 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:27:47 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	initialization(char **av, t_info **info)
 	path = bin_strjoin("./map/", av[1]);
 	(*info)->map = get_map(path);
 	find_player((*info)->map, info);
-	(void)av;
+	fill_graphic((*info)->graphic, path, 0);
 }

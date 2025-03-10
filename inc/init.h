@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 15:53:51 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:44:58 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef enum s_orient
 	EAST,
 	SOUTH
 }	t_orient;
-
 
 /*
 	information about the player
@@ -78,9 +77,11 @@ typedef struct s_info
 
 /*
 	Initialization for the elements:
-	- starting with saving the map
-	- finding player informations
+	- starting with saving the map (init..)
+	- finding player informations (init..)
+	- save the paths to textures (fill)
 */
 void	initialization(char **av, t_info **info);
+void	fill_graphic(t_graphic *graphic, char *path, int fd);
 
 #endif
