@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:19:59 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 14:10:13 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:35:11 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ void	look_map(char **map);
 	- having a pointer to element
 	- looking at spaces
 	- freeing and calling gnl
+	- creating the map
 */
 int		open_again(char *path, int flag, char *actual);
 char	*get_element(char *line);
 int		space(int c);
 char	*free_and_get(char *line, int fd);
+char	**make_map(char *path, int map_size, int fd);
 
 /*
 	Parsing errors in error.c

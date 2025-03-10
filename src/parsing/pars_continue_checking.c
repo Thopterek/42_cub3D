@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:39:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/07 11:21:29 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:34:35 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	find_colors(char *path, int fd)
 	check_color(NULL, NULL, fd);
 }
 
-static char	**make_map(char *path, int map_size, int fd)
+char	**make_map(char *path, int map_size, int fd)
 {
 	int		cc;
 	char	*line;

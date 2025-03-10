@@ -7,6 +7,7 @@
 # include "../lib/lib_pri_get/ft_printf.h"
 # include "../lib/bin_malloc/bin_malloc.h"
 # include "pars.h"
+# include "init.h"
 
 /*
 	enums for error handling
@@ -14,7 +15,8 @@
 */
 typedef enum e_errors
 {
-	PARSING = 1
+	PARSING = 1,
+	INITIAL = 2
 }	t_errors;
 
 #endif
