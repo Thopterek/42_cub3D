@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 18:27:21 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:35:45 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_info
 	- finding player informations (init..)
 	- save the paths to textures (fill)
 */
-void	initialization(char **av, t_info **info);
+void	initialization(char **av, t_info *info);
 void	fill_graphic(t_graphic *graphic, char *path, int fd);
 
 /*

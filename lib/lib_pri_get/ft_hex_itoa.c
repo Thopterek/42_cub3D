@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 12:34:26 by ndziadzi          #+#    #+#             */
-/*   Updated: 2024/10/25 14:41:17 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:19:30 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ char	*ft_hex_itoa(unsigned int n, char cc)
 	copy = n;
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n < 0)
-		copy *= -1;
 	counter = memory_cc(n, counter);
 	str = ft_calloc(counter + 1, sizeof(char));
 	if (str == NULL)
