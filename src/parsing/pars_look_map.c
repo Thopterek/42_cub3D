@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:55 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 14:03:27 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:14:03 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	big_if(char c)
 		&& space(c) != 0)
 	{
 		error_char(c);
-	}	
+	}
 }
 
 static void	valid_chars(char **map)

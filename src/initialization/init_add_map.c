@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 13:52:24 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:13:51 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	find_player(char **map, t_info *info)
 		while (map[y][x] != '\0')
 		{
 			if (map[y][x] == '\0')
-				break;
+				break ;
 			if (map[y][x] == 'N')
 				save_pos(info, y, x, NORTH);
 			else if (map[y][x] == 'W')
