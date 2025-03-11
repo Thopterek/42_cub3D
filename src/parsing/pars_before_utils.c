@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 16:20:29 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/06 19:10:33 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:16:19 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ char	*get_element(char *line)
 	int		cc;
 
 	cc = 0;
+	if (line == NULL)
+		return (NULL);
 	while (line[cc] != '\0' && space(line[cc]) == 0)
 		cc++;
+	if (line[cc] == '\0')
+		return (line);
 	path = bin_strdup(line + cc);
 	cc = 0;
 	while (path[cc + 1] != '\0')

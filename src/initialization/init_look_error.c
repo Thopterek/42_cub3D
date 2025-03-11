@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:21:10 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 18:27:17 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:08:54 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_mlx(void)
 {
 	ft_printf("Error: mlx initialization failed\n");
-	ft_printf("check: '%s'\n", mlx_strerror(mlx_errno));
+	ft_printf("check: if 'make install-deps' was run\n");
 	bin_malloc(-1);
 	exit(INITIAL);
 }

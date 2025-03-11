@@ -34,13 +34,30 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 # Compilation flags and linking options
 CFLAGS := -Wall -Wextra -Werror -g $(addprefix -I, $(INC_DIRS)) -MMD -MP
 LDFLAGS := -L$(LIBFT_PATH) -lftprintf -L$(GARBAGE_PATH) -lgarbage -L$(MLX42_PATH)/build -lmlx42
-FRAMEWORKS := -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
+
+# Linux-specific frameworks and libraries
+UNAME := $(shell uname)
+ifeq ($(UNAME), Linux)
+    FRAMEWORKS := -lglfw -lGL -lX11 -ldl -lpthread -lm
+else
+    FRAMEWORKS := -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
+endif
 
 # Submodule initialization
 SUBMODULES := $(LIBFT_PATH) $(GARBAGE_PATH) $(MLX42_PATH)
 
 $(SUBMODULES):
 	@git submodule update --init --recursive
+
+# Install dependencies for Linux
+install-deps:
+	@echo "\033[0;32mInstalling dependencies...\033[0m"
+	@if [ "$(UNAME)" = "Linux" ]; then \
+		apt update; \
+		apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
+	else \
+		echo "Dependency installation is only supported on Linux."; \
+	fi
 
 # Submodule build rules
 $(LIBFT): | $(SUBMODULES)
@@ -53,7 +70,8 @@ $(GARBAGE): | $(SUBMODULES)
 
 $(MLX42): | $(SUBMODULES)
 	@echo "\033[0;32mBuilding MLX42...\033[0m"
-	@cmake -B $(MLX42_PATH)/build -S $(MLX42_PATH)
+	@mkdir -p $(MLX42_PATH)/build
+	@cd $(MLX42_PATH)/build && cmake ..
 	@$(MAKE) -C $(MLX42_PATH)/build
 
 # Main build target
@@ -92,4 +110,4 @@ re: fclean all
 
 -include $(OBJS:%.o=%.d)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re install-deps

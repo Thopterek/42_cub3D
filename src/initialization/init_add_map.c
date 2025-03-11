@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 09:41:51 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:52:24 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	find_player(char **map, t_info *info)
 {
 	int		y;
 	int		x;
-	char	c;
 
 	y = 0;
 	x = 0;
@@ -50,14 +49,15 @@ static void	find_player(char **map, t_info *info)
 	{
 		while (map[y][x] != '\0')
 		{
-			c = map[y][x];
-			if (c == 'N')
+			if (map[y][x] == '\0')
+				break;
+			if (map[y][x] == 'N')
 				save_pos(info, y, x, NORTH);
-			else if (c == 'W')
+			else if (map[y][x] == 'W')
 				save_pos(info, y, x, WEST);
-			else if (c == 'E')
+			else if (map[y][x] == 'E')
 				save_pos(info, y, x, EAST);
-			else if (c == 'S')
+			else if (map[y][x] == 'S')
 				save_pos(info, y, x, SOUTH);
 			x++;
 		}

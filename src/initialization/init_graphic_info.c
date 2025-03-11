@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/10 18:37:40 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:50:48 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	grab_path(t_graphic *graphic, char *line)
 {
+	if (line == NULL)
+		return ;
 	if (ft_strncmp(line, "NO", 2) == 0)
 		graphic->north_path = bin_strdup(get_element(line + 2));
 	else if (ft_strncmp(line, "SO", 2) == 0)
@@ -28,6 +30,8 @@ static void	grab_colors(t_graphic *graphic, char *line)
 {
 	char	**colors;
 
+	if (line == NULL)
+		return ;
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
 		colors = bin_split(get_element(line + 1), ',');
@@ -49,6 +53,7 @@ void	fill_graphic(t_graphic *graphic, char *path, int fd)
 	int		cc;
 	char	*line;
 
+	cc = 0;
 	fd = open_again(path, MAP, path);
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -59,8 +64,11 @@ void	fill_graphic(t_graphic *graphic, char *path, int fd)
 		{
 			while (line[cc] != '\0' && space(line[cc]) == 0)
 				cc++;
-			grab_path(graphic, line + cc);
-			grab_colors(graphic, line + cc);
+			if (line[cc] != '\0')
+			{
+				grab_path(graphic, line + cc);
+				grab_colors(graphic, line + cc);
+			}
 			line = free_and_get(line, fd);
 		}
 		cc = 0;
