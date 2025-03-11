@@ -55,8 +55,8 @@ submodules:
 install-deps:
 	@echo "\033[0;32mInstalling dependencies...\033[0m"
 	@if [ "$(UNAME)" = "Linux" ]; then \
-		sudo apt update; \
-		sudo apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
+		apt update; \
+		apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
 	else \
 		echo "Dependency installation is only supported on Linux."; \
 	fi
