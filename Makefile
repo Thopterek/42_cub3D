@@ -46,36 +46,38 @@ endif
 # Submodule initialization
 SUBMODULES := $(LIBFT_PATH) $(GARBAGE_PATH) $(MLX42_PATH)
 
-$(SUBMODULES):
+# Ensure submodules are initialized
+submodules:
+	@echo "\033[0;32mInitializing submodules...\033[0m"
 	@git submodule update --init --recursive
 
 # Install dependencies for Linux
 install-deps:
 	@echo "\033[0;32mInstalling dependencies...\033[0m"
 	@if [ "$(UNAME)" = "Linux" ]; then \
-		apt update; \
-		apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
+		sudo apt update; \
+		sudo apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
 	else \
 		echo "Dependency installation is only supported on Linux."; \
 	fi
 
 # Submodule build rules
-$(LIBFT): | $(SUBMODULES)
+$(LIBFT): | submodules
 	@echo "\033[0;32mBuilding libft...\033[0m"
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(GARBAGE): | $(SUBMODULES)
+$(GARBAGE): | submodules
 	@echo "\033[0;32mBuilding garbage collector...\033[0m"
 	@$(MAKE) -C $(GARBAGE_PATH)
 
-$(MLX42): | $(SUBMODULES)
+$(MLX42): | submodules
 	@echo "\033[0;32mBuilding MLX42...\033[0m"
 	@mkdir -p $(MLX42_PATH)/build
 	@cd $(MLX42_PATH)/build && cmake ..
 	@$(MAKE) -C $(MLX42_PATH)/build
 
 # Main build target
-all: $(NAME)
+all: submodules $(NAME)
 
 $(NAME): $(LIBFT) $(GARBAGE) $(MLX42) $(OBJS)
 	@echo "\033[0;32mLinking $(NAME)...\033[0m"
@@ -110,4 +112,4 @@ re: fclean all
 
 -include $(OBJS:%.o=%.d)
 
-.PHONY: all clean fclean re install-deps
+.PHONY: all clean fclean re install-deps submodules
