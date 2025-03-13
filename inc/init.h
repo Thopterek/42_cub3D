@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 12:02:47 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:23:35 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 /*
 	helper for setting
@@ -48,7 +50,6 @@ typedef struct s_player
 */
 typedef struct s_graphic
 {
-	int		texture_size;
 	char	*east_path;
 	char	*north_path;
 	char	*south_path;
