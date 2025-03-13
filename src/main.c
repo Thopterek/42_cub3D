@@ -25,7 +25,7 @@
 	}
 	atexit(leaks);
 */
-
+/*
 int	main(int ac, char **av)
 {
 	t_info	info;
@@ -36,3 +36,4 @@ int	main(int ac, char **av)
 	bin_malloc(-1);
 	return (EXIT_SUCCESS);
 }
+*/

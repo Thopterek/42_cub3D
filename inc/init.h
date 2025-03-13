@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 12:02:47 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/13 07:53:11 by sudaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ typedef struct s_info
 	t_graphic	*graphic;
 	mlx_t		*mlx;
 }	t_info;
+
+typedef struct s_play
+{
+	double		pos_x; //start position
+	double		pos_y; //start position
+	double		dir_x; //initial direction
+	double		dir_y; // initial direction 
+	double		plane_x; // raycaster camera plane
+	double		plane_y; // raycaster camera plane
+	double		time; //time of current frame
+	double		oldtime; //time of previous frame
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}			t_play;
 
 /*
 	Initialization for the elements:
