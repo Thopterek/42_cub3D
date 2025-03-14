@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 15:47:43 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:43:25 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ typedef struct s_graphic
 	int		floor_red;
 	int		floor_green;
 	int		floor_blue;
+	int		floor;
 	int		ceiling_red;
 	int		ceiling_green;
 	int		ceiling_blue;
+	int		ceiling;
 }	t_graphic;
 
 /*
@@ -138,13 +140,17 @@ typedef struct s_info
 */
 void	initialization(char **av, t_info *info);
 void	fill_graphic(t_graphic *graphic, char *path, int fd);
+void	handle_textures(t_info *info);
+void	clean_textures(t_info *i, int to_clean);
 
 /*
 	potential errors:
 	- mlx_init fails
 	- mlx_new_image
+	- mlx_texture
 */
 void	error_mlx(void);
 void	error_img(t_info *info);
+void	error_tex(t_info *info, int c);
 
 #endif

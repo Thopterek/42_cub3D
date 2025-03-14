@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 13:50:48 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:37:52 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ static void	grab_path(t_graphic *graphic, char *line)
 		graphic->east_path = bin_strdup(get_element(line + 2));
 }
 
-static void	grab_colors(t_graphic *graphic, char *line)
+static int	rgb(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+static void	grab_colors(t_graphic *g, char *line)
 {
 	char	**colors;
 
@@ -35,16 +40,19 @@ static void	grab_colors(t_graphic *graphic, char *line)
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
 		colors = bin_split(get_element(line + 1), ',');
-		graphic->floor_red = ft_atoi(colors[0]);
-		graphic->floor_green = ft_atoi(colors[1]);
-		graphic->floor_blue = ft_atoi(colors[2]);
+		g->floor_red = ft_atoi(colors[0]);
+		g->floor_green = ft_atoi(colors[1]);
+		g->floor_blue = ft_atoi(colors[2]);
+		g->floor = rgb(g->floor_red, g->floor_green, g->floor_blue, 255);
 	}
 	else if (ft_strncmp(line, "C", 1) == 0)
 	{
 		colors = bin_split(get_element(line + 1), ',');
-		graphic->ceiling_red = ft_atoi(colors[0]);
-		graphic->ceiling_green = ft_atoi(colors[1]);
-		graphic->ceiling_blue = ft_atoi(colors[2]);
+		g->ceiling_red = ft_atoi(colors[0]);
+		g->ceiling_green = ft_atoi(colors[1]);
+		g->ceiling_blue = ft_atoi(colors[2]);
+		g->ceiling = rgb(g->ceiling_red, g->ceiling_green,
+				g->ceiling_blue, 255);
 	}
 }
 
