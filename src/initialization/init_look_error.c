@@ -19,3 +19,12 @@ void	error_mlx(void)
 	bin_malloc(-1);
 	exit(INITIAL);
 }
+
+void	error_img(t_info *info)
+{
+	ft_printf("Error: creating the main image failed\n");
+	ft_printf("check: the of everything before initialization\n");
+	mlx_terminate(info->mlx);
+	bin_malloc(-1);
+	exit(INITIAL);
+}

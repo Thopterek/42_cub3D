@@ -33,13 +33,17 @@ typedef enum s_orient
 /*
 	information about the player
 	- initial position y & x
-	- in which way he looks
+	- in which way player looks
 */
 typedef struct s_player
 {
-	int	position_y;
-	int	position_x;
-	int	orient;
+	double	s_position_y;
+	double	s_position_x;
+	int		orient;
+	double	p_direction_x;
+	double	p_direction_y;
+	double	camera_plane_x;
+	double	camera_plane_y;
 }	t_player;
 
 /*
@@ -63,6 +67,28 @@ typedef struct s_graphic
 }	t_graphic;
 
 /*
+	raycasting and render
+	variables to be used
+*/
+typedef struct s_raycast
+{
+	double	camera;
+	double	r_direction_x;
+	double	r_direction_y;
+	int		map_x;
+	int		map_y;
+	double	side_distance_x;
+	double	side_distance_y;
+	double	delta_distance_x;
+	double	delta_distance_y;
+	double	p_wall_distance;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+}	t_raycast;
+
+/*
 	main structure to be parsed
 	plus some sub structures
 	- map array
@@ -76,7 +102,9 @@ typedef struct s_info
 	char		**map;
 	t_player	*player;
 	t_graphic	*graphic;
+	t_raycast	*raycast;
 	mlx_t		*mlx;
+	mlx_image_t	*main_img;
 }	t_info;
 
 /*
@@ -91,7 +119,9 @@ void	fill_graphic(t_graphic *graphic, char *path, int fd);
 /*
 	potential errors:
 	- mlx_init fails
+	- mlx_new_image
 */
 void	error_mlx(void);
+void	error_img(t_info *info);
 
 #endif

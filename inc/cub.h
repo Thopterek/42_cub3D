@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/lib_pri_get/ft_printf.h"
 # include "../lib/bin_malloc/bin_malloc.h"
@@ -34,5 +35,12 @@ typedef enum s_errors
 	INITIAL = 2,
 	GAME = 3
 }	t_errors;
+
+/*
+	main functions of the program:
+	- raycasting
+	- key hooks
+*/
+void	raycaster(void	*param);
 
 #endif

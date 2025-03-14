@@ -31,11 +31,36 @@ static char	**get_map(char *path)
 	return (make_map(path, map_size, fd));
 }
 
+static void	update_look(t_info *info, int flag)
+{
+	if (flag == NORTH)
+	{
+		info->player->p_direction_x = -1;
+		info->player->p_direction_y = 0;
+	}
+	else if (flag == SOUTH)
+	{
+		info->player->p_direction_x = 1;
+		info->player->p_direction_y = 0;	
+	}
+	else if (flag == EAST)
+	{
+		info->player->p_direction_x = 0;
+		info->player->p_direction_y = 1;	
+	}
+	else if (flag == WEST)
+	{
+		info->player->p_direction_x = 0;
+		info->player->p_direction_y = -1;
+	}
+}
+
 static void	save_pos(t_info *info, int y, int x, int flag)
 {
-	info->player->position_y = y;
-	info->player->position_x = x;
+	info->player->s_position_y = y;
+	info->player->s_position_x = x;
 	info->player->orient = flag;
+	update_look(info, flag);
 }
 
 static void	find_player(char **map, t_info *info)
@@ -72,11 +97,17 @@ void	initialization(char **av, t_info *info)
 
 	info->player = bin_malloc(sizeof(t_player));
 	info->graphic = bin_malloc(sizeof(t_graphic));
+	info->raycast = bin_malloc(sizeof(t_raycast));
 	path = bin_strjoin("./map/", av[1]);
 	info->map = get_map(path);
 	find_player(info->map, info);
+	info->player->camera_plane_x = 0;
+	info->player->camera_plane_y = 0.66;
 	fill_graphic(info->graphic, path, 0);
 	info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (info->mlx == NULL)
 		error_mlx();
+	info->main_img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
+	if (info->main_img == NULL)
+		error_img(info);
 }
