@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_raycaster.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sudaniel <sudaniel@student.42heilbronn.de  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/14 17:08:49 by sudaniel          #+#    #+#             */
+/*   Updated: 2025/03/14 17:08:55 by sudaniel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub.h"
 
 static void	absolute_for_ray(t_raycast	*r, t_player *p, int cc)
@@ -8,7 +20,7 @@ static void	absolute_for_ray(t_raycast	*r, t_player *p, int cc)
 	r->map_x = (int)p->s_position_x;
 	r->map_y = (int)p->s_position_y;
 	r->delta_distance_x = fabs(1 / r->r_direction_x);
-	r->delta_distance_y = fabs(1 / r->r_directiony_y);
+	r->delta_distance_y = fabs(1 / r->r_direction_y);
 	r->hit = 0;
 }
 
@@ -54,8 +66,8 @@ static void	checking_hit_side(char **map, t_raycast *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (map[map_y][map_x] > 0)
-			hit = 1;
+		if (map[r->map_y][r->map_x] > 0)
+			r->hit = 1;
 	}
 	if (r->side == 0)
 		r->p_wall_distance = r->side_distance_x - r->delta_distance_x;
@@ -70,12 +82,15 @@ void	raycaster(void	*param)
 
 	cc = 0;
 	info = (t_info *)param;
-	ft_memset(info->main_img->pixels, 0, WIDTH * HEIGHT * sizeof(uint32_t));
+	ft_memset(info->img->pixels, 0, WIDTH * HEIGHT * sizeof(uint32_t));
 	while (cc < WIDTH)
 	{
 		absolute_for_ray(info->raycast, info->player, cc);
 		counting_steps(info->raycast, info->player);
 		checking_hit_side(info->map, info->raycast);
+		calc_wall_height(info->draw, info->raycast);
+		calc_wall_hit(info->draw, info->raycast, info);
+		fill_colors(info->draw, info->raycast, info, cc);
 		cc++;
 	}
 }
