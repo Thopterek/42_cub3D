@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:08:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:26:12 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:21:28 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	clean_textures(t_info *i, int to_clean)
 	while (to_clean > 0)
 	{
 		to_clean--;
-		mlx_delete_texture(info->texture[to_clean]);
+		mlx_delete_texture(i->texture[to_clean]);
 	}
 }
 

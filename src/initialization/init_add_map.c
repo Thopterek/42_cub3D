@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:43:16 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:23:42 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void	initialization(char **av, t_info *info)
 		clean_textures(info, 4);
 		error_img(info);
 	}
+	mlx_image_to_window(info->mlx, info->img, 0, 0);
 }

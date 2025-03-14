@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_raycaster.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sudaniel <sudaniel@student.42heilbronn.de  +#+  +:+       +#+        */
+/*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:08:49 by sudaniel          #+#    #+#             */
-/*   Updated: 2025/03/14 17:08:55 by sudaniel         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:27:11 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	absolute_for_ray(t_raycast	*r, t_player *p, int cc)
 {
-	r->camera = 2 * cc / (double)WIDTH - 1;
+	r->camera = 2 * cc / (double) WIDTH - 1;
 	r->r_direction_x = p->p_direction_x + p->camera_plane_x * r->camera;
 	r->r_direction_y = p->p_direction_y + p->camera_plane_y * r->camera;
 	r->map_x = (int)p->s_position_x;
@@ -58,7 +58,7 @@ static void	checking_hit_side(char **map, t_raycast *r)
 		{
 			r->side_distance_x += r->delta_distance_x;
 			r->map_x += r->step_x;
-			r->side = 1;
+			r->side = 0;
 		}
 		else
 		{
@@ -66,13 +66,34 @@ static void	checking_hit_side(char **map, t_raycast *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (map[r->map_y][r->map_x] > 0)
+		if (map[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
 	if (r->side == 0)
 		r->p_wall_distance = r->side_distance_x - r->delta_distance_x;
 	else
 		r->p_wall_distance = r->side_distance_y - r->delta_distance_y;
+}
+
+static void	floor_ceiling(t_info *i)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				i->buffer[y][x] = i->graphic->ceiling;
+			else
+				i->buffer[y][x] = i->graphic->floor;
+			x++;
+		}
+		y++;
+	}
 }
 
 void	raycaster(void	*param)
@@ -83,6 +104,7 @@ void	raycaster(void	*param)
 	cc = 0;
 	info = (t_info *)param;
 	ft_memset(info->img->pixels, 0, WIDTH * HEIGHT * sizeof(uint32_t));
+	floor_ceiling(info);
 	while (cc < WIDTH)
 	{
 		absolute_for_ray(info->raycast, info->player, cc);
@@ -93,4 +115,6 @@ void	raycaster(void	*param)
 		fill_colors(info->draw, info->raycast, info, cc);
 		cc++;
 	}
+	draw_buffer(info, info->draw);
+	ft_memset(info->buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t));
 }

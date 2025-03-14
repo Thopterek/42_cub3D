@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:50:21 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 14:30:10 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:13:31 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	handling_wasd(mlx_key_data_t k, t_player *p)
 	}
 }
 
-static void	calculation_right(mlx_key_data_t k, t_player *p)
+static void	calculation_right(t_player *p)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -50,10 +50,10 @@ static void	calculation_right(mlx_key_data_t k, t_player *p)
 	p->camera_plane_x = p->camera_plane_x * cos(-p->rot_speed)
 		- p->camera_plane_y * sin(-p->rot_speed);
 	p->camera_plane_y = old_plane_x * sin(-p->rot_speed)
-		+ p->camera_plane_y * cose(-p->rot_speed);
+		+ p->camera_plane_y * cos(-p->rot_speed);
 }
 
-static void	calc_left(mlx_key_data_t k, t_player *p)
+static void	calc_left(t_player *p)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -67,7 +67,7 @@ static void	calc_left(mlx_key_data_t k, t_player *p)
 	p->camera_plane_x = p->camera_plane_x * cos(p->rot_speed)
 		- p->camera_plane_y * sin(p->rot_speed);
 	p->camera_plane_y = old_plane_x * sin(p->rot_speed)
-		+ p->camera_plane_y * cose(p->rot_speed);
+		+ p->camera_plane_y * cos(p->rot_speed);
 }
 
 static void	rotating_view(mlx_key_data_t k, t_player *p)
@@ -75,12 +75,12 @@ static void	rotating_view(mlx_key_data_t k, t_player *p)
 	if (k.key == MLX_KEY_RIGHT
 		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 	{
-		calculation_right(k, p);
+		calculation_right(p);
 	}
 	if (k.key == MLX_KEY_LEFT
 		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 	{
-		calc_left(k, p);
+		calc_left(p);
 	}
 }
 

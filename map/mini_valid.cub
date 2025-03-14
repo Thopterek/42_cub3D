@@ -1,7 +1,7 @@
-NO ./tex/tmp_no.png
-SO ./tex/tmp_so.png
-WE ./tex/tmp_we.png
-EA ./tex/tmp_ea.png
+NO ./tex/north.png
+SO ./tex/south.png
+WE ./tex/west.png
+EA ./tex/east.png
 
 F 220,100,0
 C 225,30,0

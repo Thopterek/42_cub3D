@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	initialization(av, &info);
 	mlx_loop_hook(info.mlx, raycaster, &info);
 	mlx_key_hook(info.mlx, key_hook, &info);
-	mlx_loop(play.mlx);
+	mlx_loop(info.mlx);
 	clean_textures(&info, 4);
 	mlx_delete_image(info.mlx, info.img);
 	mlx_terminate(info.mlx);

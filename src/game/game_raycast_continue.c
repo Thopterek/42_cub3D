@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_raycast_continue.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sudaniel <sudaniel@student.42heilbronn.de  +#+  +:+       +#+        */
+/*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:13:41 by sudaniel          #+#    #+#             */
-/*   Updated: 2025/03/14 17:03:50 by sudaniel         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:58:36 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	calc_wall_height(t_draw *d, t_raycast *r)
 	}
 	else
 	{
-		if (r->r_direction_x > 0)
+		if (r->r_direction_y > 0)
 			d->tex_num = SOUTH;
 		else
 			d->tex_num = NORTH;
@@ -45,8 +45,8 @@ void	calc_wall_hit(t_draw *d, t_raycast *r, t_info *info)
 	else
 		d->wall_x = info->player->s_position_x
 			+ r->p_wall_distance * r->r_direction_x;
-	d->wall_x = floor(d->wall_x);
-	d->tex_x = (int)(d->wall_x * (double)(TEX_WIDTH));
+	d->wall_x -= floor(d->wall_x);
+	d->tex_x = (int)(d->wall_x * (double)TEX_WIDTH);
 	if (r->side == 0 && r->r_direction_x > 0)
 		d->tex_x = TEX_WIDTH - d->tex_x - 1;
 	if (r->side == 1 && r->r_direction_y < 0)
@@ -63,7 +63,7 @@ void	fill_colors(t_draw *d, t_raycast *r, t_info *info, int x)
 	while (y < d->draw_end)
 	{
 		d->tex_y = (int)d->tex_pos & (TEX_HEIGHT - 1);
-		d->tex_pos = d->step;
+		d->tex_pos += d->step;
 		d->pixel_data = (uint32_t *)info->texture[d->tex_num]->pixels;
 		d->color = d->pixel_data[d->tex_y * TEX_WIDTH + d->tex_x];
 		if (r->side == 1)
@@ -71,4 +71,29 @@ void	fill_colors(t_draw *d, t_raycast *r, t_info *info, int x)
 		info->buffer[y][x] = d->color;
 		y++;
 	}
+}
+
+void	draw_buffer(t_info *i, t_draw *d)
+{
+	int	y;
+	int	x;
+	int	index;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			d->color = i->buffer[y][x];
+			index = (y * WIDTH + x) * 4;
+			i->img->pixels[index] = (d->color >> 16) & 0xFF;
+			i->img->pixels[index + 1] = (d->color >> 8) & 0xFF;
+			i->img->pixels[index + 2] = d->color & 0xFF;
+			i->img->pixels[index + 3] = 255;
+			x++;
+		}
+		y++;
+	}
+	mlx_image_to_window(i->mlx, i->img, 0, 0);
 }
