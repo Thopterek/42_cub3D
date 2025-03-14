@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 13:02:21 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:47:43 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,24 @@ typedef struct s_raycast
 }	t_raycast;
 
 /*
+	drawing part of raycast
+*/
+typedef struct s_draw
+{
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			tex_num;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+	double		tex_pos;
+	uint32_t	*pixel_data;
+	uint32_t	color;
+}	t_draw;
+
+/*
 	main structure to be parsed
 	plus some sub structures
 	- map array
@@ -101,12 +119,15 @@ typedef struct s_raycast
 */
 typedef struct s_info
 {
-	char		**map;
-	t_player	*player;
-	t_graphic	*graphic;
-	t_raycast	*raycast;
-	mlx_t		*mlx;
-	mlx_image_t	*main_img;
+	char			**map;
+	t_player		*player;
+	t_graphic		*graphic;
+	t_raycast		*raycast;
+	t_draw			*draw;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	mlx_texture_t	*texture[4];
+	uint32_t		buffer[HEIGHT][WIDTH];
 }	t_info;
 
 /*

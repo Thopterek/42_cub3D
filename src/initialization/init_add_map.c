@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 11:05:14 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:38:36 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	initialization(char **av, t_info *info)
 	info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (info->mlx == NULL)
 		error_mlx();
-	info->main_img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
-	if (info->main_img == NULL)
+	info->img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
+	if (info->img == NULL)
 		error_img(info);
 }
