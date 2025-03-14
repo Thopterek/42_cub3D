@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:50:21 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 13:50:22 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:30:10 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ static void	calc_left(mlx_key_data_t k, t_player *p)
 static void	rotating_view(mlx_key_data_t k, t_player *p)
 {
 	if (k.key == MLX_KEY_RIGHT
-		&& (k.action == MLX_REPEAT || k.action == MLX_PRESS))
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 	{
 		calculation_right(k, p);
 	}
 	if (k.key == MLX_KEY_LEFT
-		&& (k.action == MLX_REPEAT || k.action == MLX_PRESS))
+		&& (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 	{
 		calc_left(k, p);
 	}
@@ -91,4 +91,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	info = (t_info *)param;
 	handling_wasd(keydata, info->player);
 	rotating_view(keydata, info->player);
+	if (keydata.key == MLX_KEY_ESCAPE)
+		terminate_game(info);
 }

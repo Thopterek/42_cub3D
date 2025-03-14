@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:48 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 11:03:08 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:12:43 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,10 @@ typedef enum s_errors
 */
 void	raycaster(void	*param);
 void	key_hook(mlx_key_data_t keydata, void *param);
+
+/*
+	cleaning up everything that was saved
+*/
+void	terminate_game(t_info *info)
 
 #endif
