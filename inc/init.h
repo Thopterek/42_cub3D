@@ -92,7 +92,8 @@ typedef struct s_play
 	double		oldtime; //time of previous frame
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int			texture[8][4096];
+	mlx_texture_t	*texture[4];
+	t_graphic	*graphic;
 	uint32_t	buffer[SCREENHEIGHT][SCREENWIDTH];
 }			t_play;
 

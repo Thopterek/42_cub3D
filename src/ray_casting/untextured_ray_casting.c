@@ -151,9 +151,24 @@ void	render(void *param)
 			color = 0xFFFFFFFF;
 		for (int y = draw_start; y < draw_end; y++)
 			draw_pixels(x, y, color, play);*/
-		int tex_num = worldMap[map_x][map_y] - 1;
-		if (tex_num < 0 || tex_num >= 8) // Ensure tex_num is within valid range
-			tex_num = 0;
+		// int tex_num = worldMap[map_x][map_y] - 1;
+		// if (tex_num < 0 || tex_num >= 8) // Ensure tex_num is within valid range
+		// 	tex_num = 0;
+		int tex_num;
+		if (side == 0)
+		{
+			if (ray_dir_x > 0)
+				tex_num = WEST;
+			else
+				tex_num = EAST;
+		}
+		else
+		{
+			if (ray_dir_y > 0)
+				tex_num = SOUTH;
+			else
+				tex_num = NORTH;
+		}
 		double wall_x;
 		if (side == 0)
 			wall_x = play->pos_y + perp_wall_dist * ray_dir_y;
@@ -171,7 +186,9 @@ void	render(void *param)
 		{
 			int tex_y = (int)tex_pos & (TEXHEIGHT - 1);
 			tex_pos += step;
-			uint32_t color = play->texture[tex_num][TEXHEIGHT * tex_y + tex_x];
+			uint32_t *pixel_data = (uint32_t*)play->texture[tex_num]->pixels;
+			uint32_t color = pixel_data[tex_y * TEXWIDTH + tex_x];
+			// uint32_t color = play->texture[tex_num]->pixels[tex_y * TEXWIDTH + tex_x];
 			if (side == 1)
 				color = (color >> 1) & 8355711;
 			play->buffer[y][x] = color;
@@ -186,7 +203,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_play *play;
 
 	play = (t_play *)param;
-	double move_speed = 0.1;
+	double move_speed = 0.5;
 	double rot_speed = 0.05;
 	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
@@ -235,30 +252,47 @@ void	init_play(t_play *play)
 	play->mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "RAYCASTER", false);
 	play->img = mlx_new_image(play->mlx, SCREENWIDTH, SCREENHEIGHT);
 	mlx_image_to_window(play->mlx, play->img, 0, 0);
-	for (int x = 0; x < TEXWIDTH; x++)
+	play->graphic = malloc(sizeof(t_graphic));
+	play->graphic->north_path = ft_strdup("tex/north.png");
+	play->graphic->east_path = ft_strdup("tex/east.png");
+	play->graphic->west_path = ft_strdup("tex/west.png");
+	play->graphic->south_path = ft_strdup("tex/south.png");
+	play->texture[0] = mlx_load_png(play->graphic->north_path);
+	play->texture[1] = mlx_load_png(play->graphic->west_path);
+	play->texture[2] = mlx_load_png(play->graphic->east_path);
+	play->texture[3] = mlx_load_png(play->graphic->south_path);
+	for (int i = 0; i < 4; i++)
 	{
-		for (int y = 0; y < TEXHEIGHT; y++)
+		if (!play->texture[i])
 		{
-			int xorcolor = (x * 256 / TEXWIDTH) ^ (y * 256 / TEXHEIGHT);
-			int	ycolor = y * 256 / TEXHEIGHT;
-			int	xycolor = y * 128 / TEXHEIGHT + x * 128 / TEXWIDTH;
-			play->texture[0][TEXWIDTH * y + x] = 65536 * 254 * (x != y && x != TEXWIDTH - y);
-			play->texture[1][TEXWIDTH * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;
-			play->texture[2][TEXWIDTH * y + x] = 256 * xycolor + 65536 * xycolor;
-			play->texture[3][TEXWIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor;
-			play->texture[4][TEXWIDTH * y + x] = 256 * xorcolor;
-			play->texture[5][TEXWIDTH * y + x] = 65536 * 192 * (x % 16 && y % 16);
-			play->texture[6][TEXWIDTH * y + x] = 65536 * ycolor;
-			play->texture[7][TEXWIDTH * y + x] = 128 + 256 * 128 + 65536 * 128;
+			fprintf(stderr, "Error: Failed to load texture %d\n", i);
+			exit(EXIT_FAILURE);
 		}
+		printf("Texture %d: width = %d, height = %d\n", i, play->texture[i]->width, play->texture[i]->height);
 	}
+	// for (int x = 0; x < TEXWIDTH; x++)
+	// {
+	// 	for (int y = 0; y < TEXHEIGHT; y++)
+	// 	{
+	// 		int xorcolor = (x * 256 / TEXWIDTH) ^ (y * 256 / TEXHEIGHT);
+	// 		int	ycolor = y * 256 / TEXHEIGHT;
+	// 		int	xycolor = y * 128 / TEXHEIGHT + x * 128 / TEXWIDTH;
+	// 		play->texture[0][TEXWIDTH * y + x] = 65536 * 254 * (x != y && x != TEXWIDTH - y);
+	// 		play->texture[1][TEXWIDTH * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;
+	// 		play->texture[2][TEXWIDTH * y + x] = 256 * xycolor + 65536 * xycolor;
+	// 		play->texture[3][TEXWIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor;
+	// 		play->texture[4][TEXWIDTH * y + x] = 256 * xorcolor;
+	// 		play->texture[5][TEXWIDTH * y + x] = 65536 * 192 * (x % 16 && y % 16);
+	// 		play->texture[6][TEXWIDTH * y + x] = 65536 * ycolor;
+	// 		play->texture[7][TEXWIDTH * y + x] = 128 + 256 * 128 + 65536 * 128;
+	// 	}
+	// }
 }
 
 int	main(void)
 {
 	t_play		play;
 
-	printf("ARE WE SEGFAULTING HERE\n");
 	init_play(&play);
 	mlx_loop_hook(play.mlx, render, &play);
 	mlx_key_hook(play.mlx, key_hook, &play);
