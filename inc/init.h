@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/13 07:53:11 by sudaniel         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:14:08 by sudaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define SCREENHEIGHT 1000
+# define SCREENWIDTH 2000
 
 /*
 	helper for setting
@@ -90,6 +92,8 @@ typedef struct s_play
 	double		oldtime; //time of previous frame
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	int			texture[8][4096];
+	uint32_t	buffer[SCREENHEIGHT][SCREENWIDTH];
 }			t_play;
 
 /*
