@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/13 16:23:35 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:02:21 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_player
 	double	p_direction_y;
 	double	camera_plane_x;
 	double	camera_plane_y;
+	double	move_speed;
+	double	rot_speed;
 }	t_player;
 
 /*

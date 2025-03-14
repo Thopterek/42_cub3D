@@ -33,6 +33,8 @@ int	main(int ac, char **av)
 	before_alloc(ac, av);
 	initialization(av, &info);
 	mlx_loop_hook(info.mlx, raycaster, &info);
+	mlx_key_hook(info.mlx, key_hook, &info);
+	mlx_loop(play.mlx);
 	mlx_terminate(info.mlx);
 	bin_malloc(-1);
 	return (EXIT_SUCCESS);

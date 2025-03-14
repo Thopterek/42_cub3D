@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 16:20:52 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:05:14 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ static void	update_look(t_info *info, int flag)
 	else if (flag == SOUTH)
 	{
 		info->player->p_direction_x = 1;
-		info->player->p_direction_y = 0;	
+		info->player->p_direction_y = 0;
 	}
 	else if (flag == EAST)
 	{
 		info->player->p_direction_x = 0;
-		info->player->p_direction_y = 1;	
+		info->player->p_direction_y = 1;
 	}
 	else if (flag == WEST)
 	{
@@ -103,6 +103,8 @@ void	initialization(char **av, t_info *info)
 	find_player(info->map, info);
 	info->player->camera_plane_x = 0;
 	info->player->camera_plane_y = 0.66;
+	info->player->move_speed = 0.1;
+	info->player->rot_speed = 0.05;
 	fill_graphic(info->graphic, path, 0);
 	info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (info->mlx == NULL)
