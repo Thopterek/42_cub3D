@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(info.mlx, raycaster, &info);
 	mlx_key_hook(info.mlx, key_hook, &info);
 	mlx_loop(info.mlx);
+	mlx_close_window(info.mlx);
 	clean_textures(&info, 4);
 	mlx_delete_image(info.mlx, info.img);
 	mlx_terminate(info.mlx);

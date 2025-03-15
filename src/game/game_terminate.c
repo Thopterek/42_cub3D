@@ -14,6 +14,7 @@
 
 void	terminate_game(t_info *info)
 {
+	mlx_close_window(info->mlx);
 	clean_textures(info, 4);
 	mlx_delete_image(info->mlx, info->img);
 	mlx_terminate(info->mlx);
