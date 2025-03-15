@@ -77,8 +77,9 @@ static void	checking_hit_side(char **map, t_raycast *r)
 
 static void	floor_ceiling(t_info *i)
 {
-	int	y;
-	int	x;
+	int			x;
+	int			y;
+	const int	half_h = HEIGHT / 2;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -86,7 +87,7 @@ static void	floor_ceiling(t_info *i)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2)
+			if (y < half_h)
 				i->buffer[y][x] = i->graphic->ceiling;
 			else
 				i->buffer[y][x] = i->graphic->floor;

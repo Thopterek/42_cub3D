@@ -38,15 +38,13 @@ static void	handling_wasd(mlx_key_data_t k, t_player *p)
 
 static void	calculation_right(t_player *p)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	const double	old_dir_x = p->p_direction_x;
+	const double	old_plane_x = p->camera_plane_x;
 
-	old_dir_x = p->p_direction_x;
 	p->p_direction_x = p->p_direction_x * cos(-p->rot_speed)
 		- p->p_direction_y * sin(-p->rot_speed);
 	p->p_direction_y = old_dir_x * sin(-p->rot_speed)
 		+ p->p_direction_y * cos(-p->rot_speed);
-	old_plane_x = p->camera_plane_x;
 	p->camera_plane_x = p->camera_plane_x * cos(-p->rot_speed)
 		- p->camera_plane_y * sin(-p->rot_speed);
 	p->camera_plane_y = old_plane_x * sin(-p->rot_speed)
@@ -55,15 +53,13 @@ static void	calculation_right(t_player *p)
 
 static void	calc_left(t_player *p)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	const double	old_dir_x = p->p_direction_x;
+	const double	old_plane_x = p->camera_plane_x;
 
-	old_dir_x = p->p_direction_x;
 	p->p_direction_x = p->p_direction_x * cos(p->rot_speed)
 		- p->p_direction_y * sin(p->rot_speed);
 	p->p_direction_y = old_dir_x * sin(p->rot_speed)
 		+ p->p_direction_y * cos(p->rot_speed);
-	old_plane_x = p->camera_plane_x;
 	p->camera_plane_x = p->camera_plane_x * cos(p->rot_speed)
 		- p->camera_plane_y * sin(p->rot_speed);
 	p->camera_plane_y = old_plane_x * sin(p->rot_speed)
