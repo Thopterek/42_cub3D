@@ -40,18 +40,18 @@ static void	update_look(t_info *info, int flag)
 	}
 	else if (flag == SOUTH)
 	{
-		info->player->p_direction_x = 1;
+		info->player->p_direction_x = -1;
 		info->player->p_direction_y = 0;
 	}
 	else if (flag == EAST)
 	{
-		info->player->p_direction_x = 0;
-		info->player->p_direction_y = 1;
+		info->player->p_direction_x = -1;
+		info->player->p_direction_y = 0;
 	}
 	else if (flag == WEST)
 	{
-		info->player->p_direction_x = 0;
-		info->player->p_direction_y = -1;
+		info->player->p_direction_x = -1;
+		info->player->p_direction_y = 0;
 	}
 }
 

@@ -10,7 +10,7 @@ WE ./tex/west.png
 
         EA                     ./tex/east.png
 
-F 220,100,33
+F 255,255,255
 
 
 

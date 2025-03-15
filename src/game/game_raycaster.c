@@ -112,9 +112,8 @@ void	raycaster(void	*param)
 		checking_hit_side(info->map, info->raycast);
 		calc_wall_height(info->draw, info->raycast);
 		calc_wall_hit(info->draw, info->raycast, info);
-		fill_colors(info->draw, info->raycast, info, cc);
+		fill_colors(info->draw, info, cc);
 		cc++;
 	}
 	draw_buffer(info, info->draw);
-	ft_memset(info->buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t));
 }

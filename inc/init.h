@@ -13,8 +13,8 @@
 #ifndef INIT_H
 # define INIT_H
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1024
+# define HEIGHT 768
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 

@@ -26,13 +26,13 @@ static void	handling_wasd(mlx_key_data_t k, t_player *p)
 	}
 	if (k.key == MLX_KEY_A && (k.action == MLX_REPEAT || k.action == MLX_PRESS))
 	{
-		p->s_position_x -= p->p_direction_x * p->move_speed;
-		p->s_position_y += p->p_direction_y * p->move_speed;
+		p->s_position_x -= p->p_direction_y * p->move_speed;
+		p->s_position_y += p->p_direction_x * p->move_speed;
 	}
 	if (k.key == MLX_KEY_D && (k.action == MLX_REPEAT || k.action == MLX_PRESS))
 	{
-		p->s_position_x += p->p_direction_x * p->move_speed;
-		p->s_position_y -= p->p_direction_y * p->move_speed;
+		p->s_position_x += p->p_direction_y * p->move_speed;
+		p->s_position_y -= p->p_direction_x * p->move_speed;
 	}
 }
 

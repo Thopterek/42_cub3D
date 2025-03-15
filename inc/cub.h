@@ -45,7 +45,7 @@ void	raycaster(void	*param);
 void	key_hook(mlx_key_data_t keydata, void *param);
 void	calc_wall_height(t_draw *d, t_raycast *r);
 void	calc_wall_hit(t_draw *d, t_raycast *r, t_info *info);
-void	fill_colors(t_draw *d, t_raycast *r, t_info *info, int x);
+void	fill_colors(t_draw *d, t_info *info, int x);
 void	draw_buffer(t_info *i, t_draw *d);
 
 /*
