@@ -31,9 +31,13 @@ int	main(int ac, char **av)
 	t_info	info;
 
 	before_alloc(ac, av);
+	ft_printf("We checked the map\n");
 	initialization(av, &info);
+	ft_printf("Initialization went through\n");
 	mlx_loop_hook(info.mlx, raycaster, &info);
+	ft_printf("key hook\n");
 	mlx_key_hook(info.mlx, key_hook, &info);
+	ft_printf("loop\n");
 	mlx_loop(info.mlx);
 	clean_textures(&info, 4);
 	mlx_delete_image(info.mlx, info.img);

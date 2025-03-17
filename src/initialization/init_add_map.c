@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 18:23:42 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:34:51 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,32 @@ void	initialization(char **av, t_info *info)
 	info->graphic = bin_malloc(sizeof(t_graphic));
 	info->raycast = bin_malloc(sizeof(t_raycast));
 	info->draw = bin_malloc(sizeof(t_draw));
+	ft_printf("after mallocs for structures\n");
 	path = bin_strjoin("./map/", av[1]);
+	ft_printf("getting the map\n");
 	info->map = get_map(path);
+	ft_printf("finding the player\n");
 	find_player(info->map, info);
 	info->player->camera_plane_x = 0;
 	info->player->camera_plane_y = 0.66;
 	info->player->move_speed = 0.1;
 	info->player->rot_speed = 0.05;
+	ft_printf("filling out the graphics\n");
 	fill_graphic(info->graphic, path, 0);
+	ft_printf("mlx_init\n");
+	ft_printf("WIDTH: %d, HEIGHT: %d\n", WIDTH, HEIGHT);
 	info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (info->mlx == NULL)
 		error_mlx();
-	handle_textures(info);
+	ft_printf("mlx new image\n");
 	info->img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
 	if (info->img == NULL)
 	{
 		clean_textures(info, 4);
 		error_img(info);
 	}
+	ft_printf("mlx to window\n");
 	mlx_image_to_window(info->mlx, info->img, 0, 0);
+	ft_printf("handling textures\n");
+	handle_textures(info);
 }

@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:08:49 by sudaniel          #+#    #+#             */
-/*   Updated: 2025/03/14 18:27:11 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:31:19 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,30 @@ void	raycaster(void	*param)
 	t_info	*info;
 
 	cc = 0;
+	ft_printf("Setting info\n");
 	info = (t_info *)param;
+	ft_printf("starting memset\n");
 	ft_memset(info->img->pixels, 0, WIDTH * HEIGHT * sizeof(uint32_t));
+	ft_printf("checking if floor_ceiling fails\n");
 	floor_ceiling(info);
 	while (cc < WIDTH)
 	{
+		ft_printf("absolute for ray\n");
 		absolute_for_ray(info->raycast, info->player, cc);
+		ft_printf("counting steps\n");
 		counting_steps(info->raycast, info->player);
+		ft_printf("checking hit side\n");
 		checking_hit_side(info->map, info->raycast);
+		ft_printf("calc wall height\n");
 		calc_wall_height(info->draw, info->raycast);
+		ft_printf("looking at hit\n");
 		calc_wall_hit(info->draw, info->raycast, info);
+		ft_printf("filling up the colors\n");
 		fill_colors(info->draw, info->raycast, info, cc);
 		cc++;
 	}
+	ft_printf("drawing the buffer\n");
 	draw_buffer(info, info->draw);
+	ft_printf("ending memset\n");
 	ft_memset(info->buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t));
 }
