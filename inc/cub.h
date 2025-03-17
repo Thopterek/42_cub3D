@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:48 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 17:41:00 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:14:42 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	calc_wall_height(t_draw *d, t_raycast *r);
 void	calc_wall_hit(t_draw *d, t_raycast *r, t_info *info);
 void	fill_colors(t_draw *d, t_info *info, int x);
 void	draw_buffer(t_info *i, t_draw *d);
+void	handling_wasd(mlx_key_data_t k, t_player *p, char **map);
 
 /*
 	cleaning up everything that was saved

@@ -6,17 +6,18 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 09:10:07 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:02:22 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 2000
+# define HEIGHT 1000
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define PLAYER_RADIUS 0.2
 
 /*
 	helper for setting

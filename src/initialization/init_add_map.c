@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 09:33:48 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:36:11 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,15 @@ static void	update_look(t_info *info, int flag)
 		info->player->camera_plane_x = 0.66;
 		info->player->camera_plane_y = 0;
 	}
-	else if (flag == EAST)
+}
+
+static void	save_pos(t_info *info, int y, int x, int flag)
+{
+	info->player->s_position_y = y;
+	info->player->s_position_x = x;
+	info->player->orient = flag;
+	update_look(info, flag);
+	if (flag == EAST)
 	{
 		info->player->p_direction_x = -1;
 		info->player->p_direction_y = 0;
@@ -61,14 +69,6 @@ static void	update_look(t_info *info, int flag)
 		info->player->camera_plane_x = 0;
 		info->player->camera_plane_y = -0.66;
 	}
-}
-
-static void	save_pos(t_info *info, int y, int x, int flag)
-{
-	info->player->s_position_y = y;
-	info->player->s_position_x = x;
-	info->player->orient = flag;
-	update_look(info, flag);
 }
 
 static void	find_player(char **map, t_info *info)
