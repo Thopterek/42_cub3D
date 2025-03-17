@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 11:34:33 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:01:28 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static void	grab_path(t_graphic *graphic, char *line)
 		graphic->east_path = bin_strdup(get_element(line + 2));
 }
 
-static int	rgb(int r, int g, int b, int a)
+static unsigned int	rgb(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return ((unsigned int)r << 24 | (unsigned int)g << 16
+		| (unsigned int)b << 8 | (unsigned int)a);
 }
 
 static void	grab_colors(t_graphic *g, char *line)

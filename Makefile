@@ -31,7 +31,7 @@ SRC := $(shell find src -name '*.c')
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
-# Compilation flags and linking options : TBD what the hell is this:
+# Compilation flags and linking options : to check: -fsanitize=address -fsanitize=undefined
 MLX42_CFLAGS := -Ofast -ffast-math -funroll-loops -fno-math-errno \
 				-fomit-frame-pointer -finline-functions -march=native \
 				-mtune=native -funsafe-math-optimizations

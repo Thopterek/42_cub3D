@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 13:34:45 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:58:44 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ typedef struct s_player
 */
 typedef struct s_graphic
 {
-	char	*east_path;
-	char	*north_path;
-	char	*south_path;
-	char	*west_path;
-	int		floor_red;
-	int		floor_green;
-	int		floor_blue;
-	int		floor;
-	int		ceiling_red;
-	int		ceiling_green;
-	int		ceiling_blue;
-	int		ceiling;
+	char			*east_path;
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	int				floor_red;
+	int				floor_green;
+	int				floor_blue;
+	unsigned int	floor;
+	int				ceiling_red;
+	int				ceiling_green;
+	int				ceiling_blue;
+	unsigned int	ceiling;
 }	t_graphic;
 
 /*
