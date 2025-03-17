@@ -5,7 +5,10 @@ SRCS = \
 
 OBJS = $(SRCS:.c=.o)
 CC = cc
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast -ffast-math \
+		-funroll-loops -fno-math-errno -fomit-frame-pointer \
+		-finline-functions -march=native -mtune=native \
+		-funsafe-math-optimizations
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INC_DIRS = -I$(LIBFT_DIR)

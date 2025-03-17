@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 11:34:47 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:34:45 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # define HEIGHT 1080
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define PLAYER_RADIUS 0.2
+# define PLAYER_RADIUS 0.1
+# define MOVE_SPEED 0.2
+# define ROT_SPEED 0.07
 
 /*
 	helper for setting

@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 11:33:59 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:35:38 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	initialization(char **av, t_info *info)
 	path = bin_strjoin("./map/", av[1]);
 	info->map = get_map(path);
 	find_player(info->map, info);
-	info->player->move_speed = 0.1;
-	info->player->rot_speed = 0.05;
+	info->player->move_speed = MOVE_SPEED;
+	info->player->rot_speed = ROT_SPEED;
 	fill_buffer(info);
 	fill_graphic(info->graphic, path, 0);
 	info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
