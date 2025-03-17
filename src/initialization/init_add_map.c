@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 18:23:42 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:22:12 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	update_look(t_info *info, int flag)
 {
 	if (flag == NORTH)
 	{
-		info->player->p_direction_x = -1;
+		info->player->p_direction_x = 0;
 		info->player->p_direction_y = 0;
 	}
 	else if (flag == SOUTH)
 	{
-		info->player->p_direction_x = -1;
+		info->player->p_direction_x = 0;
 		info->player->p_direction_y = 0;
 	}
 	else if (flag == EAST)
@@ -50,7 +50,7 @@ static void	update_look(t_info *info, int flag)
 	}
 	else if (flag == WEST)
 	{
-		info->player->p_direction_x = -1;
+		info->player->p_direction_x = 1;
 		info->player->p_direction_y = 0;
 	}
 }
