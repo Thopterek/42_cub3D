@@ -31,8 +31,13 @@ SRC := $(shell find src -name '*.c')
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
-# Compilation flags and linking options
-CFLAGS := -Wall -Wextra -Werror -g $(addprefix -I, $(INC_DIRS)) -MMD -MP
+# Compilation flags and linking options : to check: -fsanitize=address -fsanitize=undefined
+MLX42_CFLAGS := -Ofast -ffast-math -funroll-loops -fno-math-errno \
+				-fomit-frame-pointer -finline-functions -march=native \
+				-mtune=native -funsafe-math-optimizations
+CFLAGS := -Wall -Wextra -Werror -g $(addprefix -I, $(INC_DIRS)) -MMD -MP -Ofast \
+				-ffast-math -funroll-loops -fno-math-errno -fomit-frame-pointer \
+				-finline-functions -march=native -mtune=native -funsafe-math-optimizations
 LDFLAGS := -L$(LIBFT_PATH) -lftprintf -L$(GARBAGE_PATH) -lgarbage -L$(MLX42_PATH)/build -lmlx42
 
 # Linux-specific frameworks and libraries
@@ -56,7 +61,9 @@ install-deps:
 	@echo "\033[0;32mInstalling dependencies...\033[0m"
 	@if [ "$(UNAME)" = "Linux" ]; then \
 		apt update; \
-		apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxinerama-dev libxcursor-dev; \
+		apt install -y build-essential libx11-dev libglfw3-dev \
+		libglfw3 xorg-dev libglu1-mesa-dev libxi-dev libxrandr-dev 
+		libxinerama-dev libxcursor-dev; \
 	else \
 		echo "Dependency installation is only supported on Linux."; \
 	fi
@@ -73,7 +80,7 @@ $(GARBAGE): | submodules
 $(MLX42): | submodules
 	@echo "\033[0;32mBuilding MLX42...\033[0m"
 	@mkdir -p $(MLX42_PATH)/build
-	@cd $(MLX42_PATH)/build && cmake ..
+	@cd $(MLX42_PATH)/build && cmake .. -DCMAKE_C_FLAGS="$(MLX42_CFLAGS)"
 	@$(MAKE) -C $(MLX42_PATH)/build
 
 # Main build target

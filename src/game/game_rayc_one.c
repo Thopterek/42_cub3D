@@ -1,12 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_raycaster.c                                   :+:      :+:    :+:   */
+/*   game_rayc_one.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:08:49 by sudaniel          #+#    #+#             */
+<<<<<<< HEAD:src/game/game_raycaster.c
 /*   Updated: 2025/03/14 19:31:19 by ndziadzi         ###   ########.fr       */
+=======
+/*   Updated: 2025/03/17 11:44:43 by ndziadzi         ###   ########.fr       */
+>>>>>>> 5626cfe41a44434ce227dcdab3935e03649cf813:src/game/game_rayc_one.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +81,9 @@ static void	checking_hit_side(char **map, t_raycast *r)
 
 static void	floor_ceiling(t_info *i)
 {
-	int	y;
-	int	x;
+	int			x;
+	int			y;
+	const int	half_h = HEIGHT / 2;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -86,7 +91,7 @@ static void	floor_ceiling(t_info *i)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2)
+			if (y < half_h)
 				i->buffer[y][x] = i->graphic->ceiling;
 			else
 				i->buffer[y][x] = i->graphic->floor;
@@ -120,12 +125,19 @@ void	raycaster(void	*param)
 		calc_wall_height(info->draw, info->raycast);
 		ft_printf("looking at hit\n");
 		calc_wall_hit(info->draw, info->raycast, info);
+<<<<<<< HEAD:src/game/game_raycaster.c
 		ft_printf("filling up the colors\n");
 		fill_colors(info->draw, info->raycast, info, cc);
+=======
+		fill_colors(info->draw, info, cc);
+>>>>>>> 5626cfe41a44434ce227dcdab3935e03649cf813:src/game/game_rayc_one.c
 		cc++;
 	}
 	ft_printf("drawing the buffer\n");
 	draw_buffer(info, info->draw);
+<<<<<<< HEAD:src/game/game_raycaster.c
 	ft_printf("ending memset\n");
 	ft_memset(info->buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t));
+=======
+>>>>>>> 5626cfe41a44434ce227dcdab3935e03649cf813:src/game/game_rayc_one.c
 }

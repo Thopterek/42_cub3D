@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:37:52 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:47:56 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static void	grab_path(t_graphic *graphic, char *line)
 		graphic->east_path = bin_strdup(get_element(line + 2));
 }
 
-static int	rgb(int r, int g, int b, int a)
+static unsigned int	rgb(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return ((unsigned int)a <<24 | (unsigned int)r << 16
+	| (unsigned int)g << 8 | (unsigned int)b);
 }
 
 static void	grab_colors(t_graphic *g, char *line)
@@ -53,6 +54,19 @@ static void	grab_colors(t_graphic *g, char *line)
 		g->ceiling_blue = ft_atoi(colors[2]);
 		g->ceiling = rgb(g->ceiling_red, g->ceiling_green,
 				g->ceiling_blue, 255);
+	}
+}
+
+void	fill_buffer(t_info *info)
+{
+	int	cc;
+
+	cc = 0;
+	info->buffer = bin_malloc(sizeof(uint32_t *) * HEIGHT);
+	while (cc < HEIGHT)
+	{
+		info->buffer[cc] = bin_malloc(sizeof(uint32_t) * WIDTH);
+		cc++;
 	}
 }
 

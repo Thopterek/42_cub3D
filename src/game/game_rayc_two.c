@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_raycast_continue.c                            :+:      :+:    :+:   */
+/*   game_rayc_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:13:41 by sudaniel          #+#    #+#             */
-/*   Updated: 2025/03/14 17:58:36 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:44:57 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	calc_wall_height(t_draw *d, t_raycast *r)
 {
+	const int	half_h = HEIGHT / 2;
+
 	d->line_height = (int)(HEIGHT / r->p_wall_distance);
-	d->draw_start = -d->line_height / 2 + HEIGHT / 2;
+	d->draw_start = -d->line_height / 2 + half_h;
 	if (d->draw_start < 0)
 		d->draw_start = 0;
-	d->draw_end = d->line_height / 2 + HEIGHT / 2;
+	d->draw_end = d->line_height / 2 + half_h;
 	if (d->draw_end >= HEIGHT)
 		d->draw_end = HEIGHT - 1;
 	if (r->side == 0)
@@ -55,19 +57,17 @@ void	calc_wall_hit(t_draw *d, t_raycast *r, t_info *info)
 	d->tex_pos = (d->draw_start - HEIGHT / 2 + d->line_height / 2) * d->step;
 }
 
-void	fill_colors(t_draw *d, t_raycast *r, t_info *info, int x)
+void	fill_colors(t_draw *d, t_info *info, int x)
 {
 	int	y;	
 
 	y = d->draw_start;
+	d->pixel_data = (uint32_t *)info->texture[d->tex_num]->pixels;
 	while (y < d->draw_end)
 	{
 		d->tex_y = (int)d->tex_pos & (TEX_HEIGHT - 1);
 		d->tex_pos += d->step;
-		d->pixel_data = (uint32_t *)info->texture[d->tex_num]->pixels;
 		d->color = d->pixel_data[d->tex_y * TEX_WIDTH + d->tex_x];
-		if (r->side == 1)
-			d->color = (d->color >> 1) & 8355711;
 		info->buffer[y][x] = d->color;
 		y++;
 	}
@@ -95,5 +95,4 @@ void	draw_buffer(t_info *i, t_draw *d)
 		}
 		y++;
 	}
-	mlx_image_to_window(i->mlx, i->img, 0, 0);
 }

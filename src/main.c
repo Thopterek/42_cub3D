@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 09:36:41 by ndziadzi          #+#    #+#             */
+/*   Updated: 2025/03/17 14:02:58 by ndziadzi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 /*
@@ -39,6 +51,7 @@ int	main(int ac, char **av)
 	mlx_key_hook(info.mlx, key_hook, &info);
 	ft_printf("loop\n");
 	mlx_loop(info.mlx);
+	mlx_close_window(info.mlx);
 	clean_textures(&info, 4);
 	mlx_delete_image(info.mlx, info.img);
 	mlx_terminate(info.mlx);

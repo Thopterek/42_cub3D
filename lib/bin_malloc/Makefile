@@ -14,7 +14,9 @@ OBJ = $(SRCS:.c=.o)
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast -ffast-math -funroll-loops \
+		-fno-math-errno -fomit-frame-pointer -finline-functions \
+		-march=native -mtune=native -funsafe-math-optimizations
 
 # The rule to build the project
 all: $(NAME)

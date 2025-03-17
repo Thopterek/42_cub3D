@@ -6,17 +6,20 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:38:13 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:43:25 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:58:44 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-# define WIDTH 1920
+# define WIDTH 1980
 # define HEIGHT 1080
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define PLAYER_RADIUS 0.1
+# define MOVE_SPEED 0.2
+# define ROT_SPEED 0.07
 
 /*
 	helper for setting
@@ -56,18 +59,18 @@ typedef struct s_player
 */
 typedef struct s_graphic
 {
-	char	*east_path;
-	char	*north_path;
-	char	*south_path;
-	char	*west_path;
-	int		floor_red;
-	int		floor_green;
-	int		floor_blue;
-	int		floor;
-	int		ceiling_red;
-	int		ceiling_green;
-	int		ceiling_blue;
-	int		ceiling;
+	char			*east_path;
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	int				floor_red;
+	int				floor_green;
+	int				floor_blue;
+	unsigned int	floor;
+	int				ceiling_red;
+	int				ceiling_green;
+	int				ceiling_blue;
+	unsigned int	ceiling;
 }	t_graphic;
 
 /*
@@ -129,7 +132,7 @@ typedef struct s_info
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_texture_t	*texture[4];
-	uint32_t		buffer[HEIGHT][WIDTH];
+	uint32_t		**buffer;
 }	t_info;
 
 /*
@@ -139,6 +142,7 @@ typedef struct s_info
 	- save the paths to textures (fill)
 */
 void	initialization(char **av, t_info *info);
+void	fill_buffer(t_info *info);
 void	fill_graphic(t_graphic *graphic, char *path, int fd);
 void	handle_textures(t_info *info);
 void	clean_textures(t_info *i, int to_clean);
