@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:37:52 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:34:33 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ static void	grab_colors(t_graphic *g, char *line)
 		g->ceiling_blue = ft_atoi(colors[2]);
 		g->ceiling = rgb(g->ceiling_red, g->ceiling_green,
 				g->ceiling_blue, 255);
+	}
+}
+
+void	fill_buffer(t_info *info)
+{
+	int	cc;
+
+	cc = 0;
+	info->buffer = bin_malloc(sizeof(uint32_t *) * HEIGHT);
+	while (cc < HEIGHT)
+	{
+		info->buffer[cc] = bin_malloc(sizeof(uint32_t) * WIDTH);
+		cc++;
 	}
 }
 
