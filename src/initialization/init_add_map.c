@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 13:35:38 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:26:10 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	update_look(t_info *info, int flag)
 
 static void	save_pos(t_info *info, int y, int x, int flag)
 {
-	info->player->s_position_y = y;
-	info->player->s_position_x = x;
+	info->player->s_position_y = y + 0.5;
+	info->player->s_position_x = x + 0.5;
 	info->player->orient = flag;
 	update_look(info, flag);
 	if (flag == EAST)
