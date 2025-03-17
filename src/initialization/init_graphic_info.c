@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:06:38 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/17 15:47:56 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:10:43 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	grab_path(t_graphic *graphic, char *line)
 
 static unsigned int	rgb(int r, int g, int b, int a)
 {
-	return ((unsigned int)a <<24 | (unsigned int)r << 16
-	| (unsigned int)g << 8 | (unsigned int)b);
+	return ((unsigned int)a << 24 | (unsigned int)r << 16
+		| (unsigned int)g << 8 | (unsigned int)b);
 }
 
 static void	grab_colors(t_graphic *g, char *line)

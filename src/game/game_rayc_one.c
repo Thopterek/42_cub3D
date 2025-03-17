@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:08:49 by sudaniel          #+#    #+#             */
-/*   Updated: 2025/03/17 11:44:43 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:15:41 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 static void	absolute_for_ray(t_raycast	*r, t_player *p, int cc)
 {
+	const double	ray_angle = atan2(r->r_direction_y, r->r_direction_x)
+		- atan2(p->p_direction_y, p->p_direction_x);
+
+	r->p_wall_distance *= cos(ray_angle);
 	r->camera = 2 * cc / (double) WIDTH - 1;
 	r->r_direction_x = p->p_direction_x + p->camera_plane_x * r->camera;
 	r->r_direction_y = p->p_direction_y + p->camera_plane_y * r->camera;
