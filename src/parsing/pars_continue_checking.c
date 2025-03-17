@@ -6,7 +6,7 @@
 /*   By: ndziadzi <ndziadzi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:39:47 by ndziadzi          #+#    #+#             */
-/*   Updated: 2025/03/11 14:02:49 by ndziadzi         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:39:14 by ndziadzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	test_color(char *line, char *actual, int fd, int flag)
 	int		tmp;
 
 	cc = 0;
-	colors = bin_split(get_element(line), ',');
+	colors = bin_split(get_element(line + 2), ',');
 	while (colors[cc] != NULL)
 	{
 		tmp = ft_atoi(colors[cc]);
