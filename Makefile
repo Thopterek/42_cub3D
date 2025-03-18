@@ -23,7 +23,14 @@ vpath %.h $(INC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-SRC := $(shell find src -name '*.c')
+SRC := src/game/game_key_collision.c src/game/game_key_hook.c \
+src/game/game_rayc_one.c src/game/game_rayc_two.c src/game/game_terminate.c \
+src/initialization/init_add_map.c src/initialization/init_graphic_info.c \
+src/initialization/init_handle_tex.c src/initialization/init_look_error.c \
+src/parsing/pars_before_alloc.c src/parsing/pars_before_utils.c \
+src/parsing/pars_continue_checking.c src/parsing/pars_look_map.c \
+src/parsing/pars_print_error.c src/parsing/pars_print_more.c \
+src/parsing/pars_print_problem.c src/main.c
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
